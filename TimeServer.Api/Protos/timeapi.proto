@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option csharp_namespace = "TimeServer.Api";
+import "google/protobuf/timestamp.proto";
+
+package time_api_endpoints;
+
+service Time {
+  rpc GetCurrent (CurrentTimeRequestDto) returns (CurrentTimeResponseDto);
+}
+
+message CurrentTimeRequestDto { }
+
+message CurrentTimeResponseDto {
+  google.protobuf.Timestamp time = 1;
+}
+
+service TimeLog {
+  rpc GetLogs (LogRequestDto) returns (LogResponseDto);
+}
+
+message LogRequestDto {
+	int32 page = 1;
+	int32 size = 2;
+}
+
+message LogResponseDto {
+	repeated LogResponseItemDto logs = 1;
+}
+
+message LogResponseItemDto {
+	google.protobuf.Timestamp time = 1;
+}
